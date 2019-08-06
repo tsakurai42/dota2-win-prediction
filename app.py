@@ -42,14 +42,18 @@ dota_teams_collection = db_dota.teams
 dota_players_collection = db_dota.players
 dota_players_on_teams_collection = db_dota.players_on_teams
 dota_team_hero_stats_collection = db_dota.team_hero_stats
+dota_team_match_collection = db_dota.team_matches
 
 ti_direct_invites = [1838315, 726228, 1883502, 39, 15,
                      2163, 350190, 6214973, 2108395, 2586976, 111474, 2626685]
 
+#qualifiers         #add royal never give up, mineski, na'vi, chaos esports club, infamous, newbee
+                        #6209804            543897      36      7203342         2672298     1375614
 
 # only 'relevant' teams that have a more recent match than August 13, 2017, day after TI7 finished
 # recent_teams = dota_teams_collection.find(
 #     {'last_match_time': {'$gt': 1502582400}, 'wins': {'$gt': 50}})
+#                   1498000000 is close to start of TI
 # dota_teams_collection.delete_many({'name':''})  #some teams seem to be 'abandoned' with high rating but no name.
 
 # this function takes forever, so do not run it often!!!!!!! it runs a call for every team that the above filter finds (last match last 2 yeras, over 50 wins)
@@ -164,6 +168,18 @@ def rebuild_db():
         dota_team_hero_stats_collection.insert_one({'team_id': eachteamid, 'hero_data': hero_data})
     
     return 'done'
+
+@app.route('/grabheroandwinlossdata')
+def teamdata_to_db():
+    for team_id in ti_direct_invites:
+        dota_data_response = requests.get(f'{DotaAPIurl_base}teams/{team_id}/matches')
+        dota_data = dota_data_response.json()
+        dota_team_match_collection.insert_many(dota_data)
+    dota_team_match_collection.deleteMany( {'start_time': {'$lt': 1498000000}})
+    # game_list = dota_team_match_collection.find( {''})
+#dota_team_match_collection = db_dota.team_matches
+
+
 # @app.route(/'specificteam/<team_id>')
 # def team():
 #     query mongodb for <team_id> data, like wins/losses, current players, current rating
