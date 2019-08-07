@@ -226,7 +226,7 @@ function changeGame(game_id) {
         deaths = []
         data['teamfights'].forEach(elementy => {
             // playercount = 0;
-            console.log(elementy)
+            // console.log(elementy)
             for ([kee, vall] of Object.entries(elementy['players'])) {
                 each_death = {}
                 // console.log(kee,vall)
@@ -257,8 +257,11 @@ function changeGame(game_id) {
         xScalePos = d3.scaleLinear().domain(d3.extent(positions.map(d => parseInt(d.x)))).range([25, 375])
         yScalePos = d3.scaleLinear().domain(d3.extent(positions.map(d => parseInt(d.y)))).range([375, 25])
         // d3.extent(positions.y)
-        d3.select('#positions').attr('background-image', 'url("detailed_720.webp")')
+        // d3.select('#positions').attr('background-image', 'url("detailed_720.webp")')
+        // xProgress = d3.scaleLinear().domain([0,d3.max(deaths.map(d => d.time*2))]).range([0,400])
+        animDuration = d3.max(deaths.map(d=>d.time*2))
         posSvg.html(null)
+        d3.select('#progressbar').attr('width',0)
         posSvg.selectAll('#poscircle').data(deaths).enter().append('circle')
             .attr('cx', d => xScalePos(parseInt(d.death_pos_x)))
             .attr('cy', d => yScalePos(parseInt(d.death_pos_y)))
@@ -274,5 +277,10 @@ function changeGame(game_id) {
             .transition()
             .delay(d => d.time*2)
             .attr('r', 10)
+        d3.select('#progressbar').data(deaths)
+            .transition()
+            .duration(animDuration)
+            .ease(d3.easeLinear)
+            .attr('width',400)
     });
 }

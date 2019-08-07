@@ -2,15 +2,20 @@
 <html>
 
 <head>
-      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/style.css') }}">
-      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+      <link rel=stylesheet
+            type=text/css
+            href="{{ url_for('static', filename='styles/style.css') }}">
+      <link rel=stylesheet
+            type=text/css
+            href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
       </script>
 </head>
 
 <body>
       <div class="form-group col-3">
             <label for="topteamsselect">Select Team:</label>
-            <select class="form-control" id="topteamsselect"></select>
+            <select class="form-control"
+                    id="topteamsselect"></select>
       </div>
 
       <div id="players"></div>
@@ -19,9 +24,19 @@
       </div>
       <div class="form-group col-3">
             <label for="gameselect">Select Game:</label>
-            <select class="form-control" id="gameselect"></select>
+            <select class="form-control"
+                    id="gameselect"></select>
       </div>
-      <div id="positions" style="width:400px;height:400px;background-size:100% 100%;background-image:url( {{ url_for('static', filename='detailed_720.webp') }} )">
+      <div id="timer"
+           style="width:400px;height:25px">
+            <svg height="25px" width="400px">
+                  <rect x="0" y="0" width="400" height="25" style="fill:black;stroke-width:0"></rect>
+                  <rect x="0" y="0" width="0" height="25" style="fill:blue;stroke-width:0" id="progressbar"></rect>
+
+            </svg>
+      </div>
+      <div id="positions"
+           style="width:400px;height:400px;background-size:100% 100%;background-image:url( {{ url_for('static', filename='detailed_720.webp') }} )">
 
       </div>
       <script src="static/js/chroma.js"></script>

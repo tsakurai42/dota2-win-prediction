@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+      <!-- <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/style.css') }}"> -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+      </script>
+</head>
+
+<body>
+      <form action="/calculate" method="post">
+
+            <div class="form-row">
+                  <div class="col-md-3">
+                        <label for="radiant_team">Radiant Team Select</label>
+                        <select class="form-control" id="radiant_team" name="radiant_team">
+                        </select>
+                  </div>
+                  <div class="col-md-3">
+                        <label for="dire_team">Dire Team Select</label>
+                        <select class="form-control" id="dire_team" name="dire_team">
+                        </select>
+                  </div>
+            </div>
+            <div class="form-row">
+                  <div class="col-md-3">
+                        <label for="radiant_heroes">Radiant Team Heroes</label>
+                        <select multiple class="form-control" id="radiant_heroes" size="20" name="radiant_heroes">
+                        </select>
+                  </div>
+                  <div class="col-md-3">
+                        <label for="dire_heroes">Dire Team Heroes</label>
+                        <select multiple class="form-control" id="dire_heroes" size="20" name="dire_heroes">
+                        </select>
+                  </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class=flashes>
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
+      <script src="static/js/chroma.js"></script>
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script src="static/js/logic2.js"></script>
+</body>
+
+</html>
