@@ -20,5 +20,7 @@ Pandas, XGBoost, SKLearn, keras, Matplotlib, Pymongo, datetime, numpy, scipy, ra
 ## Files in repo:
 4 .json files can be imported into MongoDB
 collect_data.py was used to create the dataset for match prediction. It is built so if it errors, it does not re-request matches that are already in the DB. Also does not re-request if the same match comes up in the list for two different teams (if they played each other).
+
 app.py runs the flask app. It also has routes for the original data collection for team info, team hero info, player info. 
+
 model.pickle.dat is the final predictor used for the flask app
