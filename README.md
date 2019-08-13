@@ -4,8 +4,11 @@ After scraping opendota.com for pro team match history, I ran several classifica
 
 # Dota2 pro team info
 
-Combining requests, plotly, D3 to graph pro teams' players win rates, the teams' individual win rates, and plots of team fight kills of matches
+Combining requests, plotly, and D3 to graph pro teams' players' win rates, the teams' hero win rates, and animated/timed plots of team fights of recent matches
 
 ## Flask app
 
 There's some excess files, but app.py runs a flask server. The main index runs the match predictions. The "/teamviz" path runs the info page.
+
+## Libraries Used
+Pandas, XGBoost, SKLearn, keras, Matplotlib, Pymongo, datetime, numpy, scipy, random, pickle
